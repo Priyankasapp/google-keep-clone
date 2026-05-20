@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- nav bar  -->
+    <nav class="navbar-custom">
+      <!-- LEFT  -->
+      <div class="nav-left">
+        <i class="bi bi-list menu-icon" id="menuBtn" title="Main menu"></i>
+        <div class="logo-text" title="Reminders">Reminders</div>
+
+        <!-- SERCH  -->
+      </div>
+      <div class="search-container">
+        <i class="bi bi-search search-icon"></i>
+        <input
+          type="search"
+          name="search"
+          id="searchInput"
+          placeholder="Search reminders ..."
+        />
+      </div>
+
+      <!-- RIGHT  -->
+      <div class="nav-right">
+        <!-- Refresh  -->
+        <i
+          class="bi bi-arrow-clockwise nav-icon"
+          id="refreshBtn"
+          title="Refresh"
+        ></i>
+
+        <!-- List View  -->
+        <i class="bi bi-view-list nav-icon" id="listBtn" title="List View"></i>
+
+        <!-- Settings -->
+        <i class="bi bi-gear nav-icon" id="settingsBtn" title="settings"></i>
+        <!-- User  -->
+        <div class="user-icon" id="userBtn" title="Google Acounts">U</div>
+      </div>
+    </nav>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="page">
+      <div class="sidebar" id="sidebar">
+        <!-- Notes  -->
+        <div class="sidebar-item active" data-page="notes">
+          <i class="bi bi-lightbulb"></i>
+          <span class="menu-text">Notes</span>
+        </div>
+
+        <!-- reminders  -->
+        <div class="sidebar-item" data-page="reminders">
+          <i class="bi bi-bell"></i>
+          <span class="menu-text">Reminders</span>
+        </div>
+
+        <!-- edit labels  -->
+        <div class="sidebar-item" data-page="labels">
+          <i class="bi bi-pencil-square"></i>
+          <span class="menu-text">Edit Labels</span>
+        </div>
+
+        <!-- archive  -->
+        <div class="sidebar-item" data-page="archive">
+          <i class="bi bi-archive"></i>
+          <span class="menu-text">Archive</span>
+        </div>
+
+        <!-- bin  -->
+        <div class="sidebar-item" data-page="bin">
+          <i class="bi bi-trash"></i>
+          <span class="menu-text"> Bin</span>
+        </div>
+      </div>
+
+      <!-- notes section  -->
+      <!-- main section  -->
+      <div class="main-content empty-notes">
+        <!-- collapsed view -->
+        <div class="keep-box" id="keepBox">
+          <!-- TITLE ROW  -->
+          <div class="top-row">
+            <input
+              type="text"
+              id="noteTitle"
+              placeholder="Title"
+              class="hidden"
+            />
+            <i class="bi bi-pin-angle pin-icon hidden"></i>
+          </div>
+          <!-- NOTE ROW  -->
+          <div class="middle-row">
+            <div
+              id="noteInput"
+              class="note-editor"
+              contenteditable="true"
+              placeholder="Take a note..."
+            ></div>
+          </div>
+          <!-- BOOTEM ROW -->
+          <div class="bottem-row hidden">
+            <div class="left-Icons">
+              <div class="format-wrapper">
+                <!-- FORMATTING  -->
+                <i
+                  class="bi bi-fonts"
+                  title="Formatting options"
+                  id="formatBtn"
+                >
+                  <!-- Format Toolbar  -->
+                  <div class="format-toolbar hidden" id="formatToolbar">
+                    <!-- h1 button  -->
+                    <button data-tag="h1" title="Heading 1">H1</button>
+                    <!-- h2 button  -->
+                    <button data-tag="h2" title="Heading 2">H2</button>
+                    <!-- list button  -->
+                    <button data-tag="list">
+                      <i class="bi bi-list-ul" title="List"></i>
+                    </button>
+
+                    <!-- bold button  -->
+                    <button data-tag="bold">
+                      <i class="bi bi-type-bold" title="Bold"></i>
+                    </button>
+                    <!-- italic button  -->
+                    <button data-tag="italic">
+                      <i class="bi bi-type-italic" title="Italic"></i>
+                    </button>
+                    <!-- underline button  -->
+                    <button data-tag="underline">
+                      <i class="bi bi-type-underline" title="Underline"></i>
+                    </button>
+
+                    <!-- CLEAR FORMATTING -->
+                    <button data-tag="clear" title="Clear formatting">
+                      <i class="bi bi-eraser"></i>
+                    </button>
+                  </div>
+                </i>
+              </div>
+
+              <div class="palette-wrapper">
+                <i
+                  class="bi bi-palette"
+                  title="Background options"
+                  id="paletteBtn"
+                ></i>
+
+                <div class="color-palette hidden" id="colorPalette">
+                  <!-- COLORS -->
+                  <span class="section-label">Colors</span>
+
+                  <div
+                    class="color-swatch default"
+                    data-color=""
+                    title="None"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    data-color="#faafa8"
+                    style="background: #faafa8"
+                    title="Tomato"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    data-color="#f39f76"
+                    style="background: #f39f76"
+                    title="Flamingo"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    data-color="#fff8b8"
+                    style="background: #fff8b8"
+                    title="Sand"
+                  ></div>
+                  <div
+                    class="color-swatch"
+                    data-color="#e2f6d3"
+                    style="background: #e2f6d3"
+                    title="Sage"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- REMIND ME -->
+<div class="remind-wrapper">
+   <i class="bi bi-bell" title="Remind me"></i>
+</div>
+             
+              <i class="bi bi-person-plus" title="Collaborator"></i>
+              <i class="bi bi-image" title="Add image"></i>
+              <i class="bi bi-archive" title="Archive"></i>
+              <i class="bi bi-three-dots-vertical" title="More"></i>
+              <i class="bi bi-arrow-counterclockwise" title="Undo"></i>
+              <i class="bi bi-arrow-clockwise" title="Redo"></i>
+            </div>
+
+            <button class="closeBtn" id="closeBtn">Close</button>
+          </div>
+        </div>
+
+        <img src="./images/photo.png" alt="Empty Notes" class="empty-image" />
+
+        <p>Notes you add appear here</p>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="App.js"></script>
+  </body>
+</html>
