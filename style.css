@@ -355,11 +355,11 @@ body {
 }
 
 /* CONTENT */
-.note-card-content {
+/* .note-card-content {
   font-size: 15px;
 
   word-wrap: break-word;
-}
+} */
 
 /* FOOTER */
 .note-footer {
@@ -517,26 +517,17 @@ body {
   color: #202124;
 }
 
-.note-card-content {
-  font-size: 14px;
-  color: #3c4043;
-}
+
 
 .delete-note-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
   border: none;
   background: transparent;
   cursor: pointer;
   color: gray;
-  opacity: 0;
   transition: opacity 0.2s;
 }
 
-.delete-note-btn {
-  opacity: 1;
-}
+
 
 .bin-actions {
   display: flex;
@@ -583,29 +574,16 @@ body {
 .unarchive-note-btn:hover  { background: #e3f2fd; color: #1565c0; }
 .delete-archived-btn:hover { background: #fdecea; color: red; }
 
-.archive-note-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 32px; /* sits left of the delete button */
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: gray;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
+
 
 .note-card:hover .archive-note-btn {
   opacity: 1;
 }.archive-note-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 36px; /* sits left of delete button */
   border: none;
   background: transparent;
   cursor: pointer;
   color: gray;
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity 0.2s;
 }
 

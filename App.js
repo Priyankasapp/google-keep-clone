@@ -160,13 +160,34 @@ function renderNotes() {
     }
 
     $(".main-content").append(`
-      <div class="note-card" data-id="${note.id}" style="${bgStyle}">
-        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
-        <div class="note-card-content">${note.content}</div>
-       <button class="archive-note-btn" data-id="${note.id}" title="Archive">
+      <div class="keep-box" data-id="${note.id}" style="${bgStyle}">
+      <!-- TOP -->
+      <div class="top-row">
+
+        ${
+          note.title
+            ? `<div class="note-card-title">${note.title}</div>`
+            : `<div></div>`
+        }
+
+      </div> 
+      
+     <!-- CONTENT -->
+      <div class="middle-row">
+
+        <div class="note-card-content">
+          ${note.content}
+        </div>
+
+      </div>
+
+        <!-- BOTTOM -->
+      <div class="bottem-row">
+        
+       <button data-id="${note.id}" title="Archive" class="archive-note-btn">
   <i class="bi bi-archive"></i>
 </button>
-<button class="delete-note-btn" data-id="${note.id}" title="Delete">
+<button  data-id="${note.id}" title="Delete" class="delete-note-btn">
   <i class="bi bi-trash"></i>
 </button>
        
@@ -175,7 +196,6 @@ function renderNotes() {
     `);
   });
 }
-
 // ================= DELETE → BIN =================
 $(document).on("click", ".delete-note-btn", function () {
   let id = $(this).attr("data-id");
@@ -208,19 +228,40 @@ function renderBinNotes() {
 
   bin.forEach(function (note) {
     let bgStyle =
-      note.bg && note.bg.color ? `background-color: ${note.bg.color};` : "";
+      note.bg && note.bg.color
+        ? `background-color: ${note.bg.color};`
+        : `background-color:white`;
+
     $(".main-content").append(`
-      <div class="note-card" data-id="${note.id}" ${bgStyle ? `style="${bgStyle}"` : ""}>
-        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
-        <div class="note-card-content">${note.content}</div>
-        <div class="bin-actions">
+
+      <div class="keep-box" 
+      data-id="${note.id}" 
+      ${bgStyle ? `style="${bgStyle}"` : ""}>
+
+       <!-- TOP -->
+       <div class="top-row">
+       ${note.title ? `<div class="note-card-title">${note.title}</div>` : `<div></div>`}
+       
+       </div>
+          <!-- CONTENT -->
+            <div class="middle-row">
+             <div class="note-card-content">${note.content}</div>
+            </div>
+       <!-- BOTTOM -->
+       <div class="bottem-row">
+        <div class="bottem-icon">
+
+  
           <button class="restore-note-btn" data-id="${note.id}" title="Restore">
             <i class="bi bi-arrow-counterclockwise"></i> Restore
           </button>
           <button class="delete-forever-btn" data-id="${note.id}" title="Delete forever">
             <i class="bi bi-trash"></i> Delete forever
           </button>
+     
         </div>
+        </div>
+       
       </div>  
     `);
   });
@@ -289,9 +330,6 @@ function applyBgToKeepBox() {
 // APPLY COLOR WHEN CLICKING SWATCH
 $(".color-swatch").on("click", function () {
   $(this).addClass("active");
-  // let selectedColor = $(this).data("color");
-  // $(").removeClass("active");
-  // currentBg.color = selectedColor;
   currentBg.color = $(this).data("color");
   applyBgToKeepBox();
 });
