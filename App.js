@@ -447,4 +447,4 @@ $(function () {
     }
   });
 
-}); // END document ready
+}); 
