@@ -3,10 +3,31 @@ let currentBg = { color: "", image: "" };
 let savedSelection = null;
 let editingId = null;
 
+// ================= APPEND NOTE CARD =================
+function appendNoteCard(note) {
+  let bgStyle = note.bg && note.bg.color
+    ? `background-color: ${note.bg.color};`
+    : "background-color: white;";
+
+  $(".main-content").append(`
+    <div class="note-card" data-id="${note.id}" style="${bgStyle}">
+      ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
+      <div class="note-card-content">${note.content}</div>
+      <button class="archive-note-btn" data-id="${note.id}" title="Archive">
+        <i class="bi bi-archive"></i>
+      </button>
+      <button class="delete-note-btn" data-id="${note.id}" title="Delete">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  `);
+}
+
 // ================= RENDER NOTES =================
 function renderNotes() {
   let notes = JSON.parse(localStorage.getItem("notes") || "[]");
   $(".note-card").remove();
+  $(".notes-section-label").remove();
 
   if (notes.length === 0) {
     $(".empty-image").show();
@@ -17,25 +38,20 @@ function renderNotes() {
   $(".empty-image").hide();
   $("p").hide();
 
-  notes.forEach(function (note) {
-    let bgStyle = "background-color: white;";
-    if (note.bg && note.bg.color) {
-      bgStyle = `background-color: ${note.bg.color};`;
-    }
+  let pinned = notes.filter((n) => n.pinned);
+  let others = notes.filter((n) => !n.pinned);
 
-    $(".main-content").append(`
-      <div class="note-card" data-id="${note.id}" style="${bgStyle}">
-        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
-        <div class="note-card-content">${note.content}</div>
-        <button class="archive-note-btn" data-id="${note.id}" title="Archive">
-          <i class="bi bi-archive"></i>
-        </button>
-        <button class="delete-note-btn" data-id="${note.id}" title="Delete">
-          <i class="bi bi-trash"></i>
-        </button>
-      </div>
-    `);
-  });
+  if (pinned.length > 0) {
+    $(".main-content").append(`<p class="notes-section-label">PINNED</p>`);
+    pinned.forEach((note) => appendNoteCard(note));
+  }
+
+  if (others.length > 0) {
+    if (pinned.length > 0) {
+      $(".main-content").append(`<p class="notes-section-label">OTHERS</p>`);
+    }
+    others.forEach((note) => appendNoteCard(note));
+  }
 }
 
 // ================= RENDER BIN =================
@@ -54,8 +70,7 @@ function renderBinNotes() {
   }
 
   bin.forEach(function (note) {
-    let bgStyle =
-      note.bg && note.bg.color ? `background-color: ${note.bg.color};` : "";
+    let bgStyle = note.bg && note.bg.color ? `background-color: ${note.bg.color};` : "";
     $(".main-content").append(`
       <div class="note-card" data-id="${note.id}" ${bgStyle ? `style="${bgStyle}"` : ""}>
         ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
@@ -80,6 +95,7 @@ function renderArchiveNotes() {
 
   $(".note-card").remove();
   $(".empty-bin").remove();
+  $(".notes-section-label").remove();
   $(".empty-image").hide();
   $("p").hide();
 
@@ -89,10 +105,9 @@ function renderArchiveNotes() {
   }
 
   archive.forEach(function (note) {
-    let bgStyle =
-      note.bg && note.bg.color
-        ? `background-color: ${note.bg.color};`
-        : `background-color: white;`;
+    let bgStyle = note.bg && note.bg.color
+      ? `background-color: ${note.bg.color};`
+      : `background-color: white;`;
 
     $(".main-content").append(`
       <div class="note-card" data-id="${note.id}" style="${bgStyle}">
@@ -133,7 +148,6 @@ function applyBgToKeepBox() {
 // ================= DOCUMENT READY =================
 $(function () {
 
-  // Run on page load
   renderNotes();
 
   // ================= NAVBAR =================
@@ -173,6 +187,7 @@ $(function () {
     let page = $(this).data("page");
     $(".note-card").remove();
     $(".empty-bin").remove();
+    $(".notes-section-label").remove();
 
     if (page === "bin") {
       $("#keepBox").hide();
@@ -202,10 +217,16 @@ $(function () {
     if (sel.rangeCount > 0) savedSelection = sel.getRangeAt(0);
   });
 
+  // ================= PIN TOGGLE =================
+  $(document).on("click", ".pin-icon", function () {
+    $(this).toggleClass("pinned");
+  });
+
   // ================= CLOSE BUTTON =================
   $("#closeBtn").click(function () {
     let title = $("#noteTitle").val().trim();
     let content = $("#noteInput")[0].innerHTML.trim();
+    let isPinned = $(".pin-icon").hasClass("pinned"); // ✅ capture pin state
 
     if (content !== "") {
       let notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -213,6 +234,7 @@ $(function () {
         id: Date.now(),
         title,
         content,
+        pinned: isPinned, // ✅ save pin state
         bg: { color: currentBg.color || "", image: currentBg.image || "" },
       });
       localStorage.setItem("notes", JSON.stringify(notes));
@@ -221,6 +243,7 @@ $(function () {
     $("#noteTitle").val("");
     $("#noteInput")[0].innerHTML = "";
     $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
+    $(".pin-icon").removeClass("pinned"); // ✅ reset pin icon
 
     currentBg = { color: "", image: "" };
     $("#keepBox").css("background-color", "white");
@@ -290,6 +313,7 @@ $(function () {
     $("#noteTitle").val("");
     $("#noteInput")[0].innerHTML = "";
     $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
+    $(".pin-icon").removeClass("pinned");
 
     currentBg = { color: "", image: "" };
     $("#keepBox").css("background-color", "white");
@@ -423,10 +447,4 @@ $(function () {
     }
   });
 
-}); 
-
-
-  // ================= PIN TOGGLE =================
-$(document).on("click", ".pin-icon", function(){
-  $(this).toggleClass("pinned")
-})
+}); // END document ready
