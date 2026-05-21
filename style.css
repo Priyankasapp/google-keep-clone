@@ -1,3 +1,4 @@
+/* ================= BASE ================= */
 body {
   margin: 0;
   background: #f5f5f5;
@@ -5,25 +6,21 @@ body {
   display: block;
 }
 
-/* Page layout: nav on top, content (sidebar + main) below */
 .page {
   display: flex;
   align-items: flex-start;
 }
 
 /* ================= NAVBAR ================= */
-
 .navbar-custom {
   background: white;
   padding: 12px 20px;
   border-bottom: 1px solid #ddd;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* LEFT SECTION */
 .nav-left {
   display: flex;
   align-items: center;
@@ -86,16 +83,14 @@ body {
   border-radius: 50%;
   background: #0d6efd;
   color: white;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: bold;
   cursor: pointer;
 }
 
-/* side bar  */
+/* ================= SIDEBAR ================= */
 .sidebar {
   width: 250px;
   height: 100vh;
@@ -103,73 +98,62 @@ body {
   border-right: 1px solid #ddd;
 }
 
-/* sidebar items  */
 .sidebar-item {
   display: flex;
   align-items: center;
   gap: 15px;
-
   padding: 14px 20px;
   cursor: pointer;
-
   transition: 0.3s;
   border-radius: 0 30px 30px 0;
   margin-bottom: 5px;
 }
 
-.main-content {
-  flex: 1;
-  min-height: calc(100vh - 64px);
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-}
-
-/* ICON */
-.sidebar-item i {
-  font-size: 20px;
-}
-
-/* HOVER */
-.sidebar-item:hover {
-  background: #f1f3f4;
-}
-/* ACTIVE ITEM */
-.sidebar-item.active {
-  background: #feefc3;
-  font-weight: 600;
-  color: #202124;
-}
-/* ICON */
 .sidebar-item i {
   font-size: 20px;
   min-width: 25px;
 }
 
-/* ACTIVE ICON */
+.sidebar-item:hover {
+  background: #f1f3f4;
+}
+
+.sidebar-item.active {
+  background: #feefc3;
+  font-weight: 600;
+  color: #202124;
+}
+
 .sidebar-item.active i {
   color: #202124;
 }
 
-/* HIDE TEXT WHEN CLOSED */
+/* Collapsed sidebar */
 .sidebar.close .menu-text {
   display: none;
 }
-/* CLOSED SIDEBAR */
+
 .sidebar.close {
   width: 80px;
 }
 
-/* CENTER ICONS */
 .sidebar.close .sidebar-item {
   justify-content: center;
 }
 
+/* ================= MAIN CONTENT ================= */
+.main-content {
+  flex: 1;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+/* ================= NOTE CREATOR BOX ================= */
 .keep-box {
-  gap: 15px;
   width: 100%;
   max-width: 500px;
   background-color: white;
@@ -181,10 +165,10 @@ body {
   margin-bottom: 10px;
   border-radius: 12px;
   flex-direction: column;
+  gap: 15px;
   transition: 0.3s;
 }
 
-/* rows  */
 .top-row,
 .middle-row,
 .bottem-row {
@@ -193,7 +177,7 @@ body {
   width: 100%;
   background: transparent;
 }
-/* INPUT  */
+
 .keep-box input {
   border: none;
   outline: none;
@@ -223,7 +207,8 @@ body {
   font-family: 'Google Sans', Roboto, sans-serif;
   width: 100%;
 }
-/* icons  */
+
+/* ================= BOTTOM TOOLBAR ICONS ================= */
 .left-Icons {
   display: flex;
   align-items: center;
@@ -251,12 +236,11 @@ body {
   border-radius: 5px;
 }
 
-/* Format wrapper  */
+/* ================= FORMAT TOOLBAR ================= */
 .format-wrapper {
   position: relative;
 }
 
-/* TOOLBAR  */
 .format-toolbar {
   position: absolute;
   bottom: 40px;
@@ -272,7 +256,6 @@ body {
   z-index: 100;
 }
 
-/* BUTTONS  */
 .format-toolbar button {
   border: none;
   background: transparent;
@@ -288,121 +271,116 @@ body {
 .format-toolbar button:hover {
   background: #f1f3f4;
 }
-/* ICONS */
+
 .format-toolbar i {
   font-size: 15px;
 }
 
-/* HIDDEN */
-.hidden {
-  display: none;
-}
-@media (max-width: 768px) {
-  /* hide menu button */
-  .menu-icon {
-    display: none;
-  }
-
-  /* sidebar becomes icon-only */
-  .sidebar {
-    width: 80px;
-  }
-
-  /* hide text */
-  .menu-text {
-    display: none;
-  }
-
-  /* center icons */
-  .sidebar-item {
-    justify-content: center;
-  }
-
-  /* adjust main content */
-  .main-content {
-    margin-left: 80px;
-  }
-  .search-container {
-    max-width: 200px;
-  }
-  .keep-box {
-    color: black;
-  }
-  .logo-text {
-    display: none;
-  }
-  #settingsBtn {
-    display: none;
-  }
-  #refreshBtn {
-    display: none;
-  }
-  #listBtn {
-    display: none;
-  }
-  .left-icons {
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-}
 /* ================= NOTE CARDS ================= */
+.note-card {
+  position: relative;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 14px;
+  width: 220px;
+  text-align: left;
+  margin: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  vertical-align: top;
+  transition: box-shadow 0.2s;
+}
 
+.note-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
-/* TITLE */
 .note-card-title {
-  font-size: 18px;
   font-weight: bold;
-}
-
-/* CONTENT */
-/* .note-card-content {
   font-size: 15px;
+  margin-bottom: 6px;
+  color: #202124;
+}
 
+.note-card-content {
+  font-size: 14px;
+  color: #3c4043;
   word-wrap: break-word;
-} */
-
-/* FOOTER */
-.note-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-top: 10px;
 }
 
-/* FOOTER ICONS */
-.note-footer i {
-  font-size: 18px;
-
-  color: gray;
-
-  cursor: pointer;
-
-  padding: 6px;
-  border-radius: 50%;
-
-  transition: 0.2s;
-}
-
-.note-footer i:hover {
-  background: #f1f3f4;
-  color: black;
-} */
-
-/* DELETE BUTTON */
-.delete-note-btn {
+/* Archive button on card */
+.archive-note-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 36px;
   border: none;
   background: transparent;
+  cursor: pointer;
+  color: gray;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.delete-note-btn i {
+.note-card:hover .archive-note-btn {
+  opacity: 1;
+}
+
+/* Delete button on card */
+.delete-note-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
   color: gray;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.note-card:hover .delete-note-btn {
+  opacity: 1;
 }
 
 .delete-note-btn i:hover {
   color: red;
 }
+
+/* ================= BIN / ARCHIVE ACTIONS ================= */
+.bin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.restore-note-btn,
+.delete-forever-btn,
+.unarchive-note-btn,
+.delete-archived-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  color: gray;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.restore-note-btn:hover    { background: #e8f5e9; color: green; }
+.delete-forever-btn:hover  { background: #fdecea; color: red; }
+.unarchive-note-btn:hover  { background: #e3f2fd; color: #1565c0; }
+.delete-archived-btn:hover { background: #fdecea; color: red; }
+
 /* ================= COLOR PALETTE ================= */
+.palette-wrapper {
+  position: relative;
+}
+
 .color-palette {
   position: absolute;
   bottom: 45px;
@@ -414,7 +392,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   z-index: 100;
   width: 220px;
 }
@@ -450,161 +428,58 @@ body {
   position: relative;
 }
 
-/* cross line for default/none */
 .color-swatch.default::after {
   content: '';
   position: absolute;
-  top: 50%; left: 50%;
-  width: 70%; height: 2px;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 2px;
   background: #ccc;
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-/* color picker row */
-.custom-color-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.custom-color-row input[type="color"] {
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 0;
-  background: none;
-}
-
-.custom-color-row span {
-  font-size: 12px;
-  color: #555;
-}
-
-/* bg image thumbnails */
-.bg-image-thumb {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  object-fit: cover;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.15s, border 0.15s;
-}
-
-.bg-image-thumb:hover {
-  transform: scale(1.15);
-  border: 2px solid #aaa;
-}
-
-.bg-image-thumb.active {
-  border: 2px solid #202124;
-}
-
-/* palette wrapper */
-.palette-wrapper {
-  position: relative;
-}
-.note-card-title {
-  font-weight: bold;
-  font-size: 15px;
-  margin-bottom: 6px;
-  color: #202124;
-}
-
-
-
-.delete-note-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: gray;
-  transition: opacity 0.2s;
-}
-
-
-
-.bin-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.restore-note-btn,
-.delete-forever-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 12px;
-  color: gray;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  transition: background 0.2s;
-}
-
-.restore-note-btn:hover { background: #e8f5e9; color: green; }
-.delete-forever-btn:hover { background: #fdecea; color: red; }
-
+/* ================= UTILITY ================= */
 .hidden {
   display: none;
 }
-.unarchive-note-btn,
-.delete-archived-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 12px;
-  color: gray;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  transition: background 0.2s;
+
+.empty-bin {
+  color: #888;
+  margin-top: 40px;
+  font-size: 15px;
 }
 
-.unarchive-note-btn:hover  { background: #e3f2fd; color: #1565c0; }
-.delete-archived-btn:hover { background: #fdecea; color: red; }
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .menu-icon    { display: none; }
+  .logo-text    { display: none; }
+  #settingsBtn  { display: none; }
+  #refreshBtn   { display: none; }
+  #listBtn      { display: none; }
 
+  .sidebar {
+    width: 80px;
+  }
 
+  .menu-text {
+    display: none;
+  }
 
-.note-card:hover .archive-note-btn {
-  opacity: 1;
-}.archive-note-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: gray;
-  /* opacity: 0; */
-  transition: opacity 0.2s;
+  .sidebar-item {
+    justify-content: center;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .search-container {
+    max-width: 200px;
+  }
+
+  .left-Icons {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 }
-
-.note-card:hover .archive-note-btn {
-  opacity: 1;
-}
-
-.unarchive-note-btn,
-.delete-archived-btn {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 12px;
-  color: gray;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 5px;
-  transition: background 0.2s;
-}
-
-.unarchive-note-btn:hover  { background: #e3f2fd; color: #1565c0; }
-.delete-archived-btn:hover { background: #fdecea; color: red; }

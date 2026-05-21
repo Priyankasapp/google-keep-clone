@@ -21,9 +21,9 @@
       <div class="nav-left">
         <i class="bi bi-list menu-icon" id="menuBtn" title="Main menu"></i>
         <div class="logo-text" title="Reminders">Reminders</div>
-
-        <!-- SERCH  -->
       </div>
+
+      <!-- SEARCH  -->
       <div class="search-container">
         <i class="bi bi-search search-icon"></i>
         <input
@@ -48,13 +48,13 @@
 
         <!-- Settings -->
         <i class="bi bi-gear nav-icon" id="settingsBtn" title="settings"></i>
+
         <!-- User  -->
-        <div class="user-icon" id="userBtn" title="Google Acounts">U</div>
+        <div class="user-icon" id="userBtn" title="Google Accounts">U</div>
       </div>
     </nav>
 
     <!-- ================= SIDEBAR ================= -->
-
     <div class="page">
       <div class="sidebar" id="sidebar">
         <!-- Notes  -->
@@ -64,33 +64,33 @@
         </div>
 
         <!-- Reminders  -->
-        <div class="sidebar-item" data-page="reminders">
+        <!-- <div class="sidebar-item" data-page="reminders">
           <i class="bi bi-bell"></i>
           <span class="menu-text">Reminders</span>
-        </div>
+        </div> -->
 
         <!-- Edit Labels  -->
-        <div class="sidebar-item" data-page="labels">
+        <!-- <div class="sidebar-item" data-page="labels">
           <i class="bi bi-pencil-square"></i>
           <span class="menu-text">Edit Labels</span>
-        </div>
+        </div> -->
 
-        <!-- archive  -->
+        <!-- Archive  -->
         <div class="sidebar-item" data-page="archive" title="Archive">
           <i class="bi bi-archive"></i>
           <span class="menu-text">Archive</span>
         </div>
 
-        <!-- bin  -->
+        <!-- Bin  -->
         <div class="sidebar-item" data-page="bin">
           <i class="bi bi-trash"></i>
-          <span class="menu-text"> Bin</span>
+          <span class="menu-text">Bin</span>
         </div>
       </div>
 
       <!-- ================= MAIN CONTENT ================= -->
       <div class="main-content empty-notes">
-        <!-- collapsed view -->
+        <!-- Note Creator Box -->
         <div class="keep-box" id="keepBox">
           <!-- TITLE ROW  -->
           <div class="top-row">
@@ -102,6 +102,7 @@
             />
             <i class="bi bi-pin-angle pin-icon hidden"></i>
           </div>
+
           <!-- NOTE ROW  -->
           <div class="middle-row">
             <div
@@ -112,7 +113,7 @@
             ></div>
           </div>
 
-          <!-- BOOTEM ROW -->
+          <!-- BOTTOM ROW -->
           <div class="bottem-row hidden">
             <div class="left-Icons">
               <!-- FORMATTING  -->
@@ -122,29 +123,21 @@
                   title="Formatting options"
                   id="formatBtn"
                 >
-                  <!-- Format Toolbar  -->
                   <div class="format-toolbar hidden" id="formatToolbar">
-                    <!-- h1 button  -->
                     <button data-tag="h1" title="Heading 1">H1</button>
-                    <!-- h2 button  -->
                     <button data-tag="h2" title="Heading 2">H2</button>
-                    <!-- list button  -->
                     <button data-tag="list">
                       <i class="bi bi-list-ul" title="List"></i>
                     </button>
-                    <!-- bold button  -->
                     <button data-tag="bold">
                       <i class="bi bi-type-bold" title="Bold"></i>
                     </button>
-                    <!-- italic button  -->
                     <button data-tag="italic">
                       <i class="bi bi-type-italic" title="Italic"></i>
                     </button>
-                    <!-- underline button  -->
                     <button data-tag="underline">
                       <i class="bi bi-type-underline" title="Underline"></i>
                     </button>
-                    <!-- CLEAR FORMATTING -->
                     <button data-tag="clear" title="Clear formatting">
                       <i class="bi bi-eraser"></i>
                     </button>
@@ -159,11 +152,8 @@
                   title="Background options"
                   id="paletteBtn"
                 ></i>
-
                 <div class="color-palette hidden" id="colorPalette">
-                  <!-- COLORS -->
                   <span class="section-label">Colors</span>
-
                   <div
                     class="color-swatch default"
                     data-color=""
@@ -196,18 +186,17 @@
                 </div>
               </div>
 
-              <!-- REMIND ME -->
+              <!-- REMIND ME
               <div class="remind-wrapper">
                 <i class="bi bi-bell" title="Remind me"></i>
-              </div>
+              </div> -->
 
-              <i class="bi bi-person-plus" title="Collaborator"></i>
-              <i class="bi bi-image" title="Add image"></i>
-
+              <!-- <i class="bi bi-person-plus" title="Collaborator"></i> -->
+              <!-- <i class="bi bi-image" title="Add image"></i> -->
               <i class="bi bi-archive" title="Archive" id="archiveBtn"></i>
-              <i class="bi bi-three-dots-vertical" title="More"></i>
-              <i class="bi bi-arrow-counterclockwise" title="Undo"></i>
-              <i class="bi bi-arrow-clockwise" title="Redo"></i>
+              <!-- <i class="bi bi-three-dots-vertical" title="More"></i> -->
+              <!-- <i class="bi bi-arrow-counterclockwise" title="Undo"></i> -->
+              <!-- <i class="bi bi-arrow-clockwise" title="Redo"></i> -->
             </div>
 
             <button class="closeBtn" id="closeBtn">Close</button>
@@ -215,10 +204,10 @@
         </div>
 
         <img src="./images/photo.png" alt="Empty Notes" class="empty-image" />
-
         <p>Notes you add appear here</p>
       </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="App.js"></script>
   </body>

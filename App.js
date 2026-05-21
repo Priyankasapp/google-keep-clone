@@ -1,14 +1,18 @@
 $(function () {
+
   // ================= NAVBAR =================
   $("#menuBtn").click(function () {
     $("#sidebar").toggleClass("close");
   });
+
   $("#refreshBtn").click(function () {
     location.reload();
   });
+
   $("#userBtn").click(function () {
     alert("User Profile");
   });
+
   $("#settingsBtn").click(function () {
     alert("Settings Opened!");
   });
@@ -39,7 +43,6 @@ $(function () {
       renderBinNotes();
     } else if (page === "archive") {
       $("#keepBox").hide();
-      console.log("archives");
       renderArchiveNotes();
     } else if (page === "notes") {
       $("#keepBox").show();
@@ -50,6 +53,7 @@ $(function () {
       $("p").text("Notes you add appear here").show();
     }
   });
+
 });
 
 // ================= NOTE INPUT =================
@@ -63,8 +67,6 @@ $("#noteInput").focus(function () {
 $("#closeBtn").click(function () {
   let title = $("#noteTitle").val().trim();
   let content = $("#noteInput")[0].innerHTML.trim();
-
-  console.log("Saving note with bg:", currentBg);
 
   if (content !== "") {
     let notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -83,8 +85,6 @@ $("#closeBtn").click(function () {
 
   currentBg = { color: "", image: "" };
   $("#keepBox").css("background-color", "white");
-  // $(".color-swatch").removeClass("active");
-  $(this).addClass("active");
 
   renderNotes();
 });
@@ -98,6 +98,7 @@ $("#formatBtn").click(function (e) {
 $(document).click(function () {
   $("#formatToolbar").addClass("hidden");
 });
+
 $("#formatToolbar").click(function (e) {
   e.stopPropagation();
 });
@@ -126,13 +127,13 @@ function applyFormat(command, value = null) {
 $(".format-toolbar button").on("mousedown", function (e) {
   e.preventDefault();
   const formats = {
-    bold: () => applyFormat("bold"),
-    italic: () => applyFormat("italic"),
+    bold:      () => applyFormat("bold"),
+    italic:    () => applyFormat("italic"),
     underline: () => applyFormat("underline"),
-    h1: () => applyFormat("formatBlock", "<h1>"),
-    h2: () => applyFormat("formatBlock", "<h2>"),
-    list: () => applyFormat("insertUnorderedList"),
-    clear: () => applyFormat("removeFormat"),
+    h1:        () => applyFormat("formatBlock", "<h1>"),
+    h2:        () => applyFormat("formatBlock", "<h2>"),
+    list:      () => applyFormat("insertUnorderedList"),
+    clear:     () => applyFormat("removeFormat"),
   };
   let fn = formats[$(this).data("tag")];
   if (fn) fn();
@@ -160,53 +161,31 @@ function renderNotes() {
     }
 
     $(".main-content").append(`
-      <div class="keep-box" data-id="${note.id}" style="${bgStyle}">
-      <!-- TOP -->
-      <div class="top-row">
-
-        ${
-          note.title
-            ? `<div class="note-card-title">${note.title}</div>`
-            : `<div></div>`
-        }
-
-      </div> 
-      
-     <!-- CONTENT -->
-      <div class="middle-row">
-
-        <div class="note-card-content">
-          ${note.content}
-        </div>
-
+      <div class="note-card" data-id="${note.id}" style="${bgStyle}">
+        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
+        <div class="note-card-content">${note.content}</div>
+        <button class="archive-note-btn" data-id="${note.id}" title="Archive">
+          <i class="bi bi-archive"></i>
+        </button>
+        <button class="delete-note-btn" data-id="${note.id}" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
       </div>
-
-        <!-- BOTTOM -->
-      <div class="bottem-row">
-        
-       <button data-id="${note.id}" title="Archive" class="archive-note-btn">
-  <i class="bi bi-archive"></i>
-</button>
-<button  data-id="${note.id}" title="Delete" class="delete-note-btn">
-  <i class="bi bi-trash"></i>
-</button>
-       
-        
-      </div>  
     `);
   });
 }
+
 // ================= DELETE → BIN =================
 $(document).on("click", ".delete-note-btn", function () {
   let id = $(this).attr("data-id");
   let notes = JSON.parse(localStorage.getItem("notes") || "[]");
-  let bin = JSON.parse(localStorage.getItem("binNotes") || "[]");
+  let bin   = JSON.parse(localStorage.getItem("binNotes") || "[]");
 
   let deleted = notes.find((n) => String(n.id) === id);
   if (deleted) {
     bin.push(deleted);
     notes = notes.filter((n) => String(n.id) !== id);
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes",    JSON.stringify(notes));
     localStorage.setItem("binNotes", JSON.stringify(bin));
   }
   renderNotes();
@@ -217,6 +196,7 @@ function renderBinNotes() {
   let bin = JSON.parse(localStorage.getItem("binNotes") || "[]");
   bin = bin.filter((note) => note != null);
   localStorage.setItem("binNotes", JSON.stringify(bin));
+
   $(".note-card").remove();
   $(".empty-image").hide();
   $("p:not(.empty-bin)").hide();
@@ -227,57 +207,35 @@ function renderBinNotes() {
   }
 
   bin.forEach(function (note) {
-    let bgStyle =
-      note.bg && note.bg.color
-        ? `background-color: ${note.bg.color};`
-        : `background-color:white`;
-
+    let bgStyle = note.bg && note.bg.color ? `background-color: ${note.bg.color};` : "";
     $(".main-content").append(`
-
-      <div class="keep-box" 
-      data-id="${note.id}" 
-      ${bgStyle ? `style="${bgStyle}"` : ""}>
-
-       <!-- TOP -->
-       <div class="top-row">
-       ${note.title ? `<div class="note-card-title">${note.title}</div>` : `<div></div>`}
-       
-       </div>
-          <!-- CONTENT -->
-            <div class="middle-row">
-             <div class="note-card-content">${note.content}</div>
-            </div>
-       <!-- BOTTOM -->
-       <div class="bottem-row">
-        <div class="bottem-icon">
-
-  
+      <div class="note-card" data-id="${note.id}" ${bgStyle ? `style="${bgStyle}"` : ""}>
+        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
+        <div class="note-card-content">${note.content}</div>
+        <div class="bin-actions">
           <button class="restore-note-btn" data-id="${note.id}" title="Restore">
             <i class="bi bi-arrow-counterclockwise"></i> Restore
           </button>
           <button class="delete-forever-btn" data-id="${note.id}" title="Delete forever">
             <i class="bi bi-trash"></i> Delete forever
           </button>
-     
         </div>
-        </div>
-       
-      </div>  
+      </div>
     `);
   });
 }
 
-// ================= RESTORE =================
+// ================= RESTORE FROM BIN =================
 $(document).on("click", ".restore-note-btn", function () {
-  let id = $(this).attr("data-id");
-  let bin = JSON.parse(localStorage.getItem("binNotes") || "[]");
-  let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  let id    = $(this).attr("data-id");
+  let bin   = JSON.parse(localStorage.getItem("binNotes") || "[]");
+  let notes = JSON.parse(localStorage.getItem("notes")    || "[]");
 
   let restored = bin.find((n) => String(n.id) === id);
   if (restored) {
     notes.push(restored);
     bin = bin.filter((n) => String(n.id) !== id);
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes",    JSON.stringify(notes));
     localStorage.setItem("binNotes", JSON.stringify(bin));
   }
   renderBinNotes();
@@ -285,66 +243,56 @@ $(document).on("click", ".restore-note-btn", function () {
 
 // ================= DELETE FOREVER =================
 $(document).on("click", ".delete-forever-btn", function () {
-  let id = $(this).attr("data-id");
+  let id  = $(this).attr("data-id");
   let bin = JSON.parse(localStorage.getItem("binNotes") || "[]");
   bin = bin.filter((n) => String(n.id) !== id);
   localStorage.setItem("binNotes", JSON.stringify(bin));
   renderBinNotes();
 });
 
+// Run on page load
 renderNotes();
 
 // ================= PALETTE =================
 let currentBg = { color: "", image: "" };
 
-// OPEN / CLOSE
 $("#paletteBtn").click(function (e) {
   e.stopPropagation();
   $("#colorPalette").toggleClass("hidden");
 });
 
-// Close when clicking outside
 $(document).click(function (e) {
   if (!$(e.target).closest("#paletteBtn, #colorPalette").length) {
     $("#colorPalette").addClass("hidden");
   }
 });
 
-// Prevent closing when clicking inside palette
 $("#colorPalette").click(function (e) {
   e.stopPropagation();
 });
 
-// APPLY BG to keepBox live
 function applyBgToKeepBox() {
-  if (currentBg.color) {
-    $("#keepBox").css({
-      "background-color": currentBg.color,
-    });
-  } else {
-    $("#keepBox").css({
-      "background-color": "white",
-    });
-  }
+  $("#keepBox").css("background-color", currentBg.color || "white");
 }
-// APPLY COLOR WHEN CLICKING SWATCH
+
 $(".color-swatch").on("click", function () {
+  $(".color-swatch").removeClass("active");
   $(this).addClass("active");
   currentBg.color = $(this).data("color");
   applyBgToKeepBox();
 });
 
-//================= ARCHIVE =================
+// ================= ARCHIVE NOTE =================
 $(document).on("click", ".archive-note-btn", function () {
-  let id = $(this).attr("data-id");
-  let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  let id      = $(this).attr("data-id");
+  let notes   = JSON.parse(localStorage.getItem("notes")        || "[]");
   let archive = JSON.parse(localStorage.getItem("archiveNotes") || "[]");
 
   let toArchive = notes.find((n) => String(n.id) === id);
   if (toArchive) {
     archive.push(toArchive);
     notes = notes.filter((n) => String(n.id) !== id);
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes",        JSON.stringify(notes));
     localStorage.setItem("archiveNotes", JSON.stringify(archive));
   }
   renderNotes();
@@ -352,61 +300,47 @@ $(document).on("click", ".archive-note-btn", function () {
 
 // ================= ARCHIVE FROM INPUT BOX =================
 $("#archiveBtn").click(function () {
-  let title = $("#noteTitle").val().trim();
+  let title   = $("#noteTitle").val().trim();
   let content = $("#noteInput")[0].innerHTML.trim();
 
   if (content !== "") {
     let archive = JSON.parse(localStorage.getItem("archiveNotes") || "[]");
-
     archive.push({
       id: Date.now(),
-      title: title,
-      content: content,
-      bg: {
-        color: currentBg.color || "",
-        image: currentBg.image || "",
-      },
+      title,
+      content,
+      bg: { color: currentBg.color || "", image: currentBg.image || "" },
     });
-
     localStorage.setItem("archiveNotes", JSON.stringify(archive));
   }
 
-  // CLEAR INPUT BOX
   $("#noteTitle").val("");
   $("#noteInput")[0].innerHTML = "";
-
-  $("#noteTitle").addClass("hidden");
-  $(".pin-icon").addClass("hidden");
-  $(".bottem-row").addClass("hidden");
+  $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
 
   currentBg = { color: "", image: "" };
-
-  $("#keepBox").css({
-    "background-color": "white",
-  });
+  $("#keepBox").css("background-color", "white");
 });
-//============= RENDER ARCHIVE =================
+
+// ================= RENDER ARCHIVE =================
 function renderArchiveNotes() {
   let archive = JSON.parse(localStorage.getItem("archiveNotes") || "[]");
-
   archive = archive.filter((n) => n != null);
 
   $(".note-card").remove();
   $(".empty-bin").remove();
   $(".empty-image").hide();
-
   $("p").hide();
 
   if (archive.length === 0) {
-    $(".main-content").append(`<p class='empty-bin'>No archive notes</p>`);
+    $(".main-content").append(`<p class="empty-bin">No archive notes</p>`);
     return;
   }
 
   archive.forEach(function (note) {
-    let bgStyle =
-      note.bg && note.bg.color
-        ? `background-color: ${note.bg.color}; `
-        : `background-color: white;`;
+    let bgStyle = note.bg && note.bg.color
+      ? `background-color: ${note.bg.color};`
+      : `background-color: white;`;
 
     $(".main-content").append(`
       <div class="note-card" data-id="${note.id}" style="${bgStyle}">
@@ -427,15 +361,15 @@ function renderArchiveNotes() {
 
 // ================= UNARCHIVE =================
 $(document).on("click", ".unarchive-note-btn", function () {
-  let id = $(this).attr("data-id");
+  let id      = $(this).attr("data-id");
   let archive = JSON.parse(localStorage.getItem("archiveNotes") || "[]");
-  let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  let notes   = JSON.parse(localStorage.getItem("notes")        || "[]");
 
   let restored = archive.find((n) => String(n.id) === id);
   if (restored) {
     notes.push(restored);
     archive = archive.filter((n) => String(n.id) !== id);
-    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("notes",        JSON.stringify(notes));
     localStorage.setItem("archiveNotes", JSON.stringify(archive));
   }
   renderArchiveNotes();
@@ -443,7 +377,7 @@ $(document).on("click", ".unarchive-note-btn", function () {
 
 // ================= DELETE FROM ARCHIVE =================
 $(document).on("click", ".delete-archived-btn", function () {
-  let id = $(this).attr("data-id");
+  let id      = $(this).attr("data-id");
   let archive = JSON.parse(localStorage.getItem("archiveNotes") || "[]");
   archive = archive.filter((n) => String(n.id) !== id);
   localStorage.setItem("archiveNotes", JSON.stringify(archive));
