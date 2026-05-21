@@ -1,3 +1,4 @@
+let isPinned = false;
 $(function () {
   // ================= NAVBAR =================
   $("#menuBtn").click(function () {
@@ -59,12 +60,10 @@ $("#noteInput").focus(function () {
   $(".bottem-row").removeClass("hidden");
 });
 
-// ================= CLOSE BUTTON =================
+// ================= CLOSE AND SAVE BUTTON =================
 $("#closeBtn").click(function () {
   let title = $("#noteTitle").val().trim();
   let content = $("#noteInput")[0].innerHTML.trim();
-
-  console.log("Saving note with bg:", currentBg);
 
   if (content !== "") {
     let notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -79,11 +78,10 @@ $("#closeBtn").click(function () {
 
   $("#noteTitle").val("");
   $("#noteInput")[0].innerHTML = "";
-  $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
+  // $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
 
   currentBg = { color: "", image: "" };
   $("#keepBox").css("background-color", "white");
-  // $(".color-swatch").removeClass("active");
   $(this).addClass("active");
 
   renderNotes();
@@ -160,15 +158,42 @@ function renderNotes() {
     }
 
     $(".main-content").append(`
-      <div class="note-card" data-id="${note.id}" style="${bgStyle}">
-        ${note.title ? `<div class="note-card-title">${note.title}</div>` : ""}
-        <div class="note-card-content">${note.content}</div>
-       <button class="archive-note-btn" data-id="${note.id}" title="Archive">
-  <i class="bi bi-archive"></i>
-</button>
-<button class="delete-note-btn" data-id="${note.id}" title="Delete">
-  <i class="bi bi-trash"></i>
-</button>
+      <div class="keep-box saved-note" 
+       data-id="${note.id}" 
+       style="${bgStyle}">
+
+        <!-- TOP ROW -->
+       <div class="top-row">
+
+        ${
+          note.title
+            ? `<div class="note-card-title">${note.title}</div>`
+            : `<div></div>`
+        }
+         
+          </div>
+
+          <!-- MIDDLE ROW -->
+
+        <div class"middle-row">
+           <div class="note-card-content">${note.content}</div>
+        </div>
+
+       <!-- BOOTOM ROW -->
+       
+       <div class="bottem-row">
+       <div class="bottem-icon">
+         <!-- PALETTE -->
+        <i class="bi bi-palette"></i>
+
+          <!-- ARCHIVE -->
+                     <i class="bi bi-archive" title="Archive" id="archiveBtn" data-id="${note.id}"></i>
+        </i>
+        <!-- TRACE -->
+          <i class="bi bi-trash" data-id="${note.id}"></i>
+       </div>
+       </div>
+      
        
         
       </div>  
@@ -410,4 +435,32 @@ $(document).on("click", ".delete-archived-btn", function () {
   archive = archive.filter((n) => String(n.id) !== id);
   localStorage.setItem("archiveNotes", JSON.stringify(archive));
   renderArchiveNotes();
+});
+
+// ================= PIN BUTTON=================
+$("#pinIcon").click(function () {
+  let title = $("#noteTitle").val().trim();
+  let content = $("#noteInput")[0].innerHTML.trim();
+
+  console.log("Note saved");
+
+  if (content !== "") {
+    let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+    notes.push({
+      id: Date.now(),
+      title,
+      content,
+      bg: { color: currentBg.color || "" },
+    });
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }
+  $("#noteTitle").val("");
+  $("#noteInput")[0].innerHTML = "";
+  $("#noteInput, .pin-icon, .bottem-row").addClass("hidden");
+
+  currentBg = { color: "", image: " " };
+  $("keepBox").css("background-color", "white");
+  $(this).addClass("active");
+
+  renderNotes();
 });

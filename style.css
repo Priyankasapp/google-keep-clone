@@ -522,6 +522,10 @@ body {
   color: #3c4043;
 }
 
+.bottem-icon{
+  justify-content: space-between;
+}
+
 .delete-note-btn {
   position: absolute;
   bottom: 8px;
@@ -630,3 +634,91 @@ body {
 
 .unarchive-note-btn:hover  { background: #e3f2fd; color: #1565c0; }
 .delete-archived-btn:hover { background: #fdecea; color: red; }
+
+/* TOP ROW */
+.saved-note .top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* TITLE */
+.saved-note .note-card-title {
+  flex: 1;
+  padding-right: 10px;
+}
+
+/* PIN RIGHT SIDE */
+.saved-note .pin-icon {
+  margin-left: auto;
+  font-size: 18px;
+  color: #5f6368;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+}
+
+/* HOVER */
+.saved-note .pin-icon:hover {
+  color: #202124;
+}
+/* ================= BOTTOM ROW ================= */
+
+.saved-note .bottem-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 8px;
+}
+
+/* ICON CONTAINER */
+.saved-note .bottem-icon {
+  display: flex;
+ 
+
+}
+
+/* ICON STYLE */
+.saved-note .bottem-icon i {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  color: #5f6368;
+  font-size: 16px;
+
+  transition: all 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.saved-note .bottem-icon i:hover {
+  background: rgba(95, 99, 104, 0.12);
+  color: #202124;
+}
+
+/* ARCHIVE ICON */
+.saved-note .bi-archive:hover {
+  color: #1a73e8;
+}
+
+/* DELETE ICON */
+.saved-note .bi-trash:hover {
+  color: #d93025;
+}
+
+/* PALETTE ICON */
+.saved-note .bi-palette:hover {
+  color: #f9ab00;
+}
