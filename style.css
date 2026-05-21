@@ -217,11 +217,14 @@ body {
 
 .left-Icons i,
 .pin-icon {
-  font-size: 18px;
-  color: gray;
-  cursor: pointer;
+   cursor: pointer;
+  font-size: 1.2rem;
+  color: #80868b; 
+  transition: color 0.2s;
 }
-
+.pin-icon.pinned {
+  color: #202124; 
+}
 .left-Icons i:hover,
 .pin-icon:hover {
   color: black;
@@ -482,4 +485,62 @@ body {
     gap: 12px;
     flex-wrap: wrap;
   }
+}
+/* ================= EDIT POPUP ================= */
+
+.edit-popup{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.edit-card{
+  width: 500px;
+  min-height: 300px;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.edit-card input{
+  width: 100%;
+  border: none;
+  outline: none;
+
+  font-size: 22px;
+  font-weight: bold;
+
+  margin-bottom: 15px;
+}
+
+#editContent{
+  min-height: 180px;
+  outline: none;
+  font-size: 16px;
+}
+
+.edit-actions{
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+
+.edit-actions button{
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hidden{
+  display: none;
 }
