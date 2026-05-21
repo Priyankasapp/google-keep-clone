@@ -351,7 +351,7 @@ function renderArchiveNotes() {
             <i class="bi bi-arrow-up-circle"></i> Unarchive
           </button>
           <button class="delete-archived-btn" data-id="${note.id}" title="Delete">
-            <i class="bi bi-trash"></i> Delete
+            <i class="bi bi-trash"></i> Deletehello
           </button>
         </div>
       </div>
