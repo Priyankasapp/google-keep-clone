@@ -31,12 +31,12 @@ function renderNotes() {
 
   if (notes.length === 0) {
     $(".empty-image").show();
-    $("p").text("Notes you add appear here").show();
+    $("#emptyMsg").text("Notes you add appear here").show();
     return;
   }
 
   $(".empty-image").hide();
-  $("p").hide();
+  $("#emptyMsg").hide();
 
   let pinned = notes.filter((n) => n.pinned);
   let others = notes.filter((n) => !n.pinned);
@@ -226,7 +226,7 @@ $(function () {
   $("#closeBtn").click(function () {
     let title = $("#noteTitle").val().trim();
     let content = $("#noteInput")[0].innerHTML.trim();
-    let isPinned = $(".pin-icon").hasClass("pinned"); // ✅ capture pin state
+    let isPinned = $(".pin-icon").hasClass("pinned"); 
 
     if (content !== "") {
       let notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -234,7 +234,7 @@ $(function () {
         id: Date.now(),
         title,
         content,
-        pinned: isPinned, // ✅ save pin state
+        pinned: isPinned, 
         bg: { color: currentBg.color || "", image: currentBg.image || "" },
       });
       localStorage.setItem("notes", JSON.stringify(notes));
@@ -243,7 +243,7 @@ $(function () {
     $("#noteTitle").val("");
     $("#noteInput")[0].innerHTML = "";
     $("#noteTitle, .pin-icon, .bottem-row").addClass("hidden");
-    $(".pin-icon").removeClass("pinned"); // ✅ reset pin icon
+    $(".pin-icon").removeClass("pinned"); 
 
     currentBg = { color: "", image: "" };
     $("#keepBox").css("background-color", "white");

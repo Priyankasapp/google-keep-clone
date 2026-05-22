@@ -20,10 +20,10 @@
       <!-- LEFT  -->
       <div class="nav-left">
         <i class="bi bi-list menu-icon" id="menuBtn" title="Main menu"></i>
-        <div class="logo-text" title="Reminders">Reminders</div>
+        <div class="logo-text" title="Reminders">TODO Notes</div>
       </div>
 
-      <!-- SEARCH  -->
+      <!-- SEARCH 
       <div class="search-container">
         <i class="bi bi-search search-icon"></i>
         <input
@@ -32,7 +32,7 @@
           id="searchInput"
           placeholder="Search reminders ..."
         />
-      </div>
+      </div> -->
 
       <!-- RIGHT  -->
       <div class="nav-right">
@@ -44,13 +44,13 @@
         ></i>
 
         <!-- List View  -->
-        <i class="bi bi-view-list nav-icon" id="listBtn" title="List View"></i>
+        <!-- <i class="bi bi-view-list nav-icon" id="listBtn" title="List View"></i> -->
 
         <!-- Settings -->
-        <i class="bi bi-gear nav-icon" id="settingsBtn" title="settings"></i>
+        <!-- <i class="bi bi-gear nav-icon" id="settingsBtn" title="settings"></i> -->
 
         <!-- User  -->
-        <div class="user-icon" id="userBtn" title="Google Accounts">U</div>
+        <!-- <div class="user-icon" id="userBtn" title="Google Accounts">U</div> -->
       </div>
     </nav>
 
@@ -203,25 +203,23 @@
           </div>
         </div>
 
-        <img src="./images/photo.png" alt="Empty Notes" class="empty-image" />
-        <p>Notes you add appear here</p>
+        <!-- <img src="./images/photo.png" alt="Empty Notes" class="empty-image" /> -->
+        <p id="emptyMsg">Notes you add appear here</p>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="App.js"></script>
 
-   
-
     <!-- ================= EDIT POPUP ================= -->
     <div id="editPopup" class="edit-popup hidden">
       <div class="edit-card">
-        <input type="text" id="editTitle" placeholder="Title">
+        <input type="text" id="editTitle" placeholder="Title" />
         <div id="editContent" contenteditable="true"></div>
         <div class="edit-actions">
-  <button id="saveEditBtn">Save</button>
-  <button id="closeEditBtn">Close</button>
-</div>
+          <button id="saveEditBtn" class="btn">Save</button>
+          <button id="closeEditBtn" class="btn">Close</button>
+        </div>
       </div>
     </div>
   </body>
